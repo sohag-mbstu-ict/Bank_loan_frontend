@@ -37,20 +37,11 @@ def signup(request):
             else:
                 user=User.objects.create_user(username=username,email=email,password=password1)
 
-
-
-
-
-
                 subject = 'welcome to ICT,MBSTU AI Based project'
                 message = f'Hi {user.username}, thank you for registering in our program "Provides student loan for coronavirus economic crisis"'
                 email_from = settings.EMAIL_HOST_USER
                 recipient_list = [user.email]
                 send_mail(subject, message, email_from, recipient_list)
-
-
-
-
 
                 user.save()
                 print('user is created')
@@ -62,9 +53,13 @@ def signup(request):
     else:
         return render(request,'signup.html')
 
-
-
-
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+
+def apply(request):
+    if request.method == 'POST':
+        return redirect('/admin/app_name/approvals/add/')
+    else:
+        return redirect('/')

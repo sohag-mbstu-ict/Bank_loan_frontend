@@ -85,7 +85,8 @@
 					</div>
 				</div>
 				<div class="col-lg-6">
-					<form class="hero-form">
+					<form class="hero-form" action="/app/apply/" method="post">
+						{% csrf_token %}
 						<input type="text" placeholder="Your Name">
 						<input type="text" placeholder="Your E-mail">
 						<input type="text" placeholder="Your Phone">
