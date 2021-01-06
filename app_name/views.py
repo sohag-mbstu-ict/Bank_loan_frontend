@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
+from django.conf import settings
+from django.core.mail import send_mail
 #def login(request):
  #   return render(request,'login.html')
 def login(request):
@@ -34,6 +36,22 @@ def signup(request):
                 return redirect('signup')
             else:
                 user=User.objects.create_user(username=username,email=email,password=password1)
+
+
+
+
+
+
+                subject = 'welcome to ICT,MBSTU AI Based project'
+                message = f'Hi {user.username}, thank you for registering in our program "Provides student loan for coronavirus economic crisis"'
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = [user.email]
+                send_mail(subject, message, email_from, recipient_list)
+
+
+
+
+
                 user.save()
                 print('user is created')
                 return redirect('/')
